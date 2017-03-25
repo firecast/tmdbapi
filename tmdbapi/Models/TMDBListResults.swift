@@ -55,7 +55,8 @@ public class TMDBMovieListResult: TMDBListResultProtocol {
     public var mediaType : TMDBMediaType
     
     internal init?(json: JSON) {
-        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue) else {
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+            mediaType == .movie else {
             return nil
         }
         self.mediaType = mediaType
@@ -126,7 +127,8 @@ public class TMDBTVListResult: TMDBListResultProtocol {
     public var mediaType : TMDBMediaType
     
     internal init?(json: JSON) {
-        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue) else {
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+            mediaType == .tv else {
             return nil
         }
         self.mediaType = mediaType
@@ -165,6 +167,64 @@ public class TMDBTVListResult: TMDBListResultProtocol {
 }
 
 public class TMDBPersonListResult {
+    public let profilePath: String
+    public let isAdult: Bool
+    public let id: UInt
+    
+    public let knownFor: [TMDBListResultProtocol]
+    public let name: String
+    public let popularity: NSNumber
+    
+    // MARK: TMDBListResult
+    public var title: String {
+        get {
+            return self.name
+        }
+    }
+    public var description: String {
+        get {
+            var desc = "Known for "
+            for known in knownFor {
+                desc += known.title + ", "
+            }
+            let endIndex = desc.index(desc.endIndex, offsetBy: -2)
+            return desc.substring(to: endIndex)
+        }
+    }
+    public var imagePath: String {
+        get {
+            return self.profilePath
+        }
+    }
+    public var mediaType : TMDBMediaType
+    
+    internal init?(json: JSON) {
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+            mediaType == .person else {
+            return nil
+        }
+        self.mediaType = mediaType
+        
+        self.profilePath = json["profile_path"].stringValue
+        self.isAdult = json["adult"].boolValue
+        self.id = json["id"].uIntValue
+        self.name = json["name"].stringValue
+        self.popularity = json["popularity"].numberValue
+        
+        // Known for
+        var knownFor = [TMDBListResultProtocol]()
+        for (_, knownForJSON):(String, JSON) in json["known_for"] {
+            if let movieListResult = TMDBMovieListResult(json: knownForJSON) {
+                knownFor.append(movieListResult)
+            }
+            if let tvListResult = TMDBMovieListResult(json: knownForJSON) {
+                knownFor.append(tvListResult)
+            }
+        }
+        self.knownFor = knownFor
+    }
+    
+    
     
 }
 
