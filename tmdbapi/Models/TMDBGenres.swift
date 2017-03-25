@@ -28,6 +28,15 @@ public enum TMDBMovieGenre: Int {
     case thriller = 53
     case war = 10752
     case western = 37
+    
+    public func toString() -> String {
+        switch self {
+        case .tvMovie:
+            return "TV Movie"
+        default:
+            return String(describing: self).camelCaps
+        }
+    }
 }
 
 public enum TMDBTVGenre: Int {
@@ -47,4 +56,33 @@ public enum TMDBTVGenre: Int {
     case talk = 10767
     case warAndPolitics = 10768
     case western = 37
+    
+    public func toString() -> String {
+        switch self {
+        case .actionAndAdventure, .warAndPolitics:
+            return String(describing: self).camelCaps.replacingOccurrences(of: "And", with: "&")
+        case .scifiAndFantasy:
+            return "Sci-Fi & Fantasy"
+        default:
+            return String(describing: self).camelCaps
+        }
+    }
+}
+
+extension String {
+    
+    var camelCaps: String {
+        var newString: String = ""
+        
+        let upperCase = CharacterSet.uppercaseLetters
+        for scalar in self.unicodeScalars {
+            if upperCase.contains(scalar) {
+                newString.append(" ")
+            }
+            let character = Character(scalar)
+            newString.append(character)
+        }
+        
+        return newString.capitalized
+    }
 }
