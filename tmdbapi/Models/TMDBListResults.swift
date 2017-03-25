@@ -9,14 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TMDBListResultProtocol: ResponseObjectSerializable {
+public protocol TMDBListResultProtocol {
     var title: String { get }
     var description: String { get }
     var imagePath: String { get }
     var mediaType: TMDBMediaType { get }
 }
 
-final public class TMDBMovieListResult: TMDBListResultProtocol {
+final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializable {
     public let posterPath: String?
     
     public let isAdult: Bool
@@ -89,7 +89,7 @@ final public class TMDBMovieListResult: TMDBListResultProtocol {
     
 }
 
-final public class TMDBTVListResult: TMDBListResultProtocol {
+final public class TMDBTVListResult: TMDBListResultProtocol, ResponseSerializable {
     public let posterPath: String?
     
     public let overview: String
@@ -166,7 +166,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol {
     
 }
 
-final public class TMDBPersonListResult: TMDBListResultProtocol {
+final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseSerializable {
     public let profilePath: String
     public let isAdult: Bool
     public let id: UInt
