@@ -63,7 +63,7 @@ final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializ
     
     public let isAdult: Bool
     public let overview: String
-    public let releaseDate: Date
+    public let releaseDate: Date?
     public let originalTitle: String
     public let genres: [TMDBMovieGenre]
     
@@ -106,7 +106,7 @@ final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializ
         self.posterPath = json["poster_path"].string
         self.isAdult = json["adult"].boolValue
         self.overview = json["overview"].stringValue
-        self.releaseDate = TMDBAPIStatic.dateFormatter.date(from: json["release_date"].stringValue)!
+        self.releaseDate = TMDBAPIStatic.dateFormatter.date(from: json["release_date"].stringValue)
         
         self.originalTitle = json["original_title"].stringValue
         self.id = json["id"].uIntValue

@@ -10,10 +10,10 @@ import Foundation
 import Alamofire
 
 internal enum TMDBSearchRouter: URLRequestConvertible {
-    case multi(query: String)
-    case movie(query: String)
-    case tv(query: String)
-    case person(query: String)
+    case multi(query: String, page: Int?)
+    case movie(query: String, page: Int?)
+    case tv(query: String, page: Int?)
+    case person(query: String, page: Int?)
     
     static let baseURLString = TMDBAPIStatic.baseURL + "/search"
     
@@ -51,8 +51,8 @@ internal enum TMDBSearchRouter: URLRequestConvertible {
         urlRequest.httpMethod = method.rawValue
         
         switch self {
-        case .multi(let query), .movie(let query), .person(let query), .tv(let query):
-            let params = ["query": query]
+        case .multi(let query, let page), .movie(let query, let page), .person(let query, let page), .tv(let query, let page):
+            let params = ["query": query, "page": (page != nil) ? "\(page!)" : "1"]
             urlRequest = try URLEncoding.default.encode(urlRequest, with: params)
         }
         
