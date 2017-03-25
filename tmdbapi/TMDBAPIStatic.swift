@@ -13,4 +13,10 @@ internal class TMDBAPIStatic {
     static let version = "3"
     
     static let baseURL = "https://api.themoviedb.org/" + TMDBAPIStatic.version
+    
+    static let dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }()
 }
