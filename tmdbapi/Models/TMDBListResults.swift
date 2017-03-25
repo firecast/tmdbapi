@@ -77,12 +77,13 @@ public class TMDBMovieListResult: TMDBListResult {
         self.voteAverage = json["vote_average"].numberValue
         
         // Genres
-        self.genres = [TMDBMovieGenre]()
+        var genres = [TMDBMovieGenre]()
         for (_, genreID):(String, JSON) in json["genere_ids"] {
             if let genre = TMDBMovieGenre(rawValue: genreID.intValue) {
-                self.genres.append(genre)
+                genres.append(genre)
             }
         }
+        self.genres = genres
     }
     
 }
