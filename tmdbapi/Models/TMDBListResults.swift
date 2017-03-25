@@ -90,6 +90,7 @@ public class TMDBMovieListResult: TMDBListResult {
 
 public class TMDBTVListResult {
     
+    
 }
 
 public class TMDBPersonListResult {
