@@ -32,14 +32,14 @@ internal enum TMDBSearchRouter: URLRequestConvertible {
     
     var path: String {
         switch self {
-        case .multi(let queryString):
-            return "/multi?query=\(queryString)"
-        case .movie(let queryString):
-            return "/movie?query=\(queryString)"
-        case .tv(let queryString):
-            return "/tv?query=\(queryString)"
-        case .person(let queryString):
-            return "/person?query=\(queryString)"
+        case .multi:
+            return "/multi"
+        case .movie:
+            return "/movie"
+        case .tv:
+            return "/tv"
+        case .person:
+            return "/person"
         }
     }
     
@@ -49,6 +49,12 @@ internal enum TMDBSearchRouter: URLRequestConvertible {
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
+        
+        switch self {
+        case .multi(let query), .movie(let query), .person(let query), .tv(let query):
+            let params = ["query": query]
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: params)
+        }
         
         return urlRequest
     }

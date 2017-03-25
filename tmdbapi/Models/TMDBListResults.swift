@@ -9,14 +9,15 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TMDBListResultProtocol {
+public protocol TMDBListResultProtocol: ResponseObjectSerializable {
     var title: String { get }
     var description: String { get }
     var imagePath: String { get }
     var mediaType: TMDBMediaType { get }
 }
 
-final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializable {
+
+final public class TMDBMovieListResult: TMDBListResultProtocol {
     public let posterPath: String?
     
     public let isAdult: Bool
@@ -55,7 +56,8 @@ final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializ
     public var mediaType : TMDBMediaType
     
     public init?(json: JSON) {
-        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+        
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].string ?? "movie"),
             mediaType == .movie else {
             return nil
         }
@@ -89,7 +91,7 @@ final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializ
     
 }
 
-final public class TMDBTVListResult: TMDBListResultProtocol, ResponseSerializable {
+final public class TMDBTVListResult: TMDBListResultProtocol {
     public let posterPath: String?
     
     public let overview: String
@@ -127,7 +129,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol, ResponseSerializabl
     public var mediaType : TMDBMediaType
     
     public init?(json: JSON) {
-        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].string ?? "tv"),
             mediaType == .tv else {
             return nil
         }
@@ -166,7 +168,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol, ResponseSerializabl
     
 }
 
-final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseSerializable {
+final public class TMDBPersonListResult: TMDBListResultProtocol {
     public let profilePath: String
     public let isAdult: Bool
     public let id: UInt
@@ -199,7 +201,7 @@ final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseSeriali
     public var mediaType : TMDBMediaType
     
     public init?(json: JSON) {
-        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
+        guard let mediaType = TMDBMediaType(rawValue: json["media_type"].string ?? "person"),
             mediaType == .person else {
             return nil
         }
