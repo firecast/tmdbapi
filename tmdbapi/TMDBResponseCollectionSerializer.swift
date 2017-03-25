@@ -10,9 +10,30 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
+
+protocol ResponseCollectionSerializable {
+    static func collection(json: JSON) -> [Self]
+}
+
+protocol ResponseSerializable: ResponseObjectSerializable, ResponseCollectionSerializable {}
+
+extension ResponseCollectionSerializable where Self: ResponseObjectSerializable {
+    static func collection(json: JSON) -> [Self] {
+        var collection: [Self] = []
+        
+        for (_, resultJSON):(String, JSON) in json["results"] {
+            if let item = Self(json: resultJSON) {
+                collection.append(item)
+            }
+        }
+        
+        return collection
+    }
+}
+
 extension DataRequest {
     @discardableResult
-    func responseCollection<T: ResponseObjectSerializable>(
+    func responseCollection<T: ResponseCollectionSerializable>(
         queue: DispatchQueue? = nil,
         completionHandler: @escaping (DataResponse<[T]>) -> Void) -> Self
     {
@@ -31,14 +52,7 @@ extension DataRequest {
                 return .failure(TMDBAPIError.objectSerialization(reason: reason))
             }
             
-            var collection: [T] = []
-            
-            for (_, resultJSON):(String, JSON) in JSON(jsonObject)["results"] {
-                if let item = T(json: resultJSON) {
-                    collection.append(item)
-                }
-            }
-            return .success(collection)
+            return .success(T.collection(json: JSON(jsonObject)))
         }
         
         return response(responseSerializer: responseSerializer, completionHandler: completionHandler)

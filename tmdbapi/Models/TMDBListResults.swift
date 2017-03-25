@@ -16,7 +16,7 @@ public protocol TMDBListResultProtocol {
     var mediaType: TMDBMediaType { get }
 }
 
-final public class TMDBMultiListResult: TMDBListResultProtocol, ResponseObjectSerializable {
+final public class TMDBMultiListResult: TMDBListResultProtocol, ResponseSerializable {
     public var title: String {
         get {
             return self.listObject.title
@@ -58,7 +58,7 @@ final public class TMDBMultiListResult: TMDBListResultProtocol, ResponseObjectSe
 }
 
 
-final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseObjectSerializable {
+final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseSerializable {
     public let posterPath: String?
     
     public let isAdult: Bool
@@ -131,7 +131,7 @@ final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseObjectSe
     
 }
 
-final public class TMDBTVListResult: TMDBListResultProtocol, ResponseObjectSerializable {
+final public class TMDBTVListResult: TMDBListResultProtocol, ResponseSerializable {
     public let posterPath: String?
     
     public let overview: String
@@ -208,7 +208,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol, ResponseObjectSeria
     
 }
 
-final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseObjectSerializable {
+final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseSerializable {
     public let profilePath: String
     public let isAdult: Bool
     public let id: UInt
