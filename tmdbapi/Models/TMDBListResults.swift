@@ -9,14 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TMDBListResultProtocol {
+public protocol TMDBListResultProtocol: ResponseObjectSerializable {
     var title: String { get }
     var description: String { get }
     var imagePath: String { get }
     var mediaType: TMDBMediaType { get }
 }
 
-public class TMDBMovieListResult: TMDBListResultProtocol {
+final public class TMDBMovieListResult: TMDBListResultProtocol {
     public let posterPath: String?
     
     public let isAdult: Bool
@@ -54,7 +54,7 @@ public class TMDBMovieListResult: TMDBListResultProtocol {
     }
     public var mediaType : TMDBMediaType
     
-    internal init?(json: JSON) {
+    public init?(json: JSON) {
         guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
             mediaType == .movie else {
             return nil
@@ -89,7 +89,7 @@ public class TMDBMovieListResult: TMDBListResultProtocol {
     
 }
 
-public class TMDBTVListResult: TMDBListResultProtocol {
+final public class TMDBTVListResult: TMDBListResultProtocol {
     public let posterPath: String?
     
     public let overview: String
@@ -126,7 +126,7 @@ public class TMDBTVListResult: TMDBListResultProtocol {
     }
     public var mediaType : TMDBMediaType
     
-    internal init?(json: JSON) {
+    public init?(json: JSON) {
         guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
             mediaType == .tv else {
             return nil
@@ -166,7 +166,7 @@ public class TMDBTVListResult: TMDBListResultProtocol {
     
 }
 
-public class TMDBPersonListResult {
+final public class TMDBPersonListResult: TMDBListResultProtocol {
     public let profilePath: String
     public let isAdult: Bool
     public let id: UInt
@@ -198,7 +198,7 @@ public class TMDBPersonListResult {
     }
     public var mediaType : TMDBMediaType
     
-    internal init?(json: JSON) {
+    public init?(json: JSON) {
         guard let mediaType = TMDBMediaType(rawValue: json["media_type"].stringValue),
             mediaType == .person else {
             return nil
