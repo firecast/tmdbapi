@@ -37,9 +37,9 @@ internal enum TMDBSearchRouter: URLRequestConvertible {
         case .movie(let queryString):
             return "/movie?query=\(queryString)"
         case .tv(let queryString):
-            return "/movie?query=\(queryString)"
+            return "/tv?query=\(queryString)"
         case .person(let queryString):
-            return "/movie?query=\(queryString)"
+            return "/person?query=\(queryString)"
         }
     }
     
