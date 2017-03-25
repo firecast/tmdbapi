@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280C23731E86637800EA9393 /* TMDBSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C23721E86637800EA9393 /* TMDBSearchRouter.swift */; };
+		280C23751E86640300EA9393 /* TMDBAPIStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C23741E86640300EA9393 /* TMDBAPIStatic.swift */; };
 		285C85D71E8655CA007A9DCB /* tmdbapi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 285C85CD1E8655CA007A9DCB /* tmdbapi.framework */; };
 		285C85DC1E8655CA007A9DCB /* tmdbapiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285C85DB1E8655CA007A9DCB /* tmdbapiTests.swift */; };
 		285C85DE1E8655CA007A9DCB /* tmdbapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 285C85D01E8655CA007A9DCB /* tmdbapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +30,8 @@
 		14D5DE621A6A71F7343A628F /* Pods-tmdbapiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmdbapiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-tmdbapiTests/Pods-tmdbapiTests.release.xcconfig"; sourceTree = "<group>"; };
 		1B9B1D45345389A865F846D8 /* Pods_tmdbapi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tmdbapi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E038C03DADC8599CFC71975 /* Pods-tmdbapiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tmdbapiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tmdbapiTests/Pods-tmdbapiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		280C23721E86637800EA9393 /* TMDBSearchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TMDBSearchRouter.swift; path = Routers/TMDBSearchRouter.swift; sourceTree = "<group>"; };
+		280C23741E86640300EA9393 /* TMDBAPIStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBAPIStatic.swift; sourceTree = "<group>"; };
 		285C85CD1E8655CA007A9DCB /* tmdbapi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tmdbapi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		285C85D01E8655CA007A9DCB /* tmdbapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmdbapi.h; sourceTree = "<group>"; };
 		285C85D11E8655CA007A9DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280C23711E86636000EA9393 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				280C23721E86637800EA9393 /* TMDBSearchRouter.swift */,
+			);
+			name = Routers;
+			sourceTree = "<group>";
+		};
 		285C85C31E8655C9007A9DCB = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +95,10 @@
 		285C85CF1E8655CA007A9DCB /* tmdbapi */ = {
 			isa = PBXGroup;
 			children = (
+				280C23711E86636000EA9393 /* Routers */,
 				285C85D01E8655CA007A9DCB /* tmdbapi.h */,
 				285C85D11E8655CA007A9DCB /* Info.plist */,
+				280C23741E86640300EA9393 /* TMDBAPIStatic.swift */,
 			);
 			path = tmdbapi;
 			sourceTree = "<group>";
@@ -186,6 +200,7 @@
 					285C85CC1E8655C9007A9DCB = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = W27FE2K6M6;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					285C85D51E8655CA007A9DCB = {
@@ -313,6 +328,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				280C23731E86637800EA9393 /* TMDBSearchRouter.swift in Sources */,
+				280C23751E86640300EA9393 /* TMDBAPIStatic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A1A7F11FD5F23E74313F7DB7 /* Pods-tmdbapi.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = W27FE2K6M6;
@@ -450,6 +468,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.amitdprabhu.tmdbapi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -458,6 +477,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB3E5252793E030B2B8F0CFC /* Pods-tmdbapi.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = W27FE2K6M6;
@@ -478,6 +498,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E038C03DADC8599CFC71975 /* Pods-tmdbapiTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = W27FE2K6M6;
 				INFOPLIST_FILE = tmdbapiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -491,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 14D5DE621A6A71F7343A628F /* Pods-tmdbapiTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = W27FE2K6M6;
 				INFOPLIST_FILE = tmdbapiTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -519,6 +541,7 @@
 				285C85E31E8655CA007A9DCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		285C85E41E8655CA007A9DCB /* Build configuration list for PBXNativeTarget "tmdbapiTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +550,7 @@
 				285C85E61E8655CA007A9DCB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
