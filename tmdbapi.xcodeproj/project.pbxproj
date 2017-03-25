@@ -15,6 +15,7 @@
 		280C237E1E86865200EA9393 /* TMDBAPIRequestAdaptar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C237D1E86865200EA9393 /* TMDBAPIRequestAdaptar.swift */; };
 		280C23801E868D1F00EA9393 /* TMDBResponseObjectSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C237F1E868D1F00EA9393 /* TMDBResponseObjectSerializer.swift */; };
 		280C23821E8697FB00EA9393 /* TMDBResponseCollectionSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C23811E8697FB00EA9393 /* TMDBResponseCollectionSerializer.swift */; };
+		280C23841E86E5A400EA9393 /* TMDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280C23831E86E5A400EA9393 /* TMDBRequest.swift */; };
 		285C85D71E8655CA007A9DCB /* tmdbapi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 285C85CD1E8655CA007A9DCB /* tmdbapi.framework */; };
 		285C85DC1E8655CA007A9DCB /* tmdbapiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285C85DB1E8655CA007A9DCB /* tmdbapiTests.swift */; };
 		285C85DE1E8655CA007A9DCB /* tmdbapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 285C85D01E8655CA007A9DCB /* tmdbapi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,6 +45,7 @@
 		280C237D1E86865200EA9393 /* TMDBAPIRequestAdaptar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBAPIRequestAdaptar.swift; sourceTree = "<group>"; };
 		280C237F1E868D1F00EA9393 /* TMDBResponseObjectSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBResponseObjectSerializer.swift; sourceTree = "<group>"; };
 		280C23811E8697FB00EA9393 /* TMDBResponseCollectionSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBResponseCollectionSerializer.swift; sourceTree = "<group>"; };
+		280C23831E86E5A400EA9393 /* TMDBRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBRequest.swift; sourceTree = "<group>"; };
 		285C85CD1E8655CA007A9DCB /* tmdbapi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tmdbapi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		285C85D01E8655CA007A9DCB /* tmdbapi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tmdbapi.h; sourceTree = "<group>"; };
 		285C85D11E8655CA007A9DCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				280C237D1E86865200EA9393 /* TMDBAPIRequestAdaptar.swift */,
 				280C237F1E868D1F00EA9393 /* TMDBResponseObjectSerializer.swift */,
 				280C23811E8697FB00EA9393 /* TMDBResponseCollectionSerializer.swift */,
+				280C23831E86E5A400EA9393 /* TMDBRequest.swift */,
 			);
 			path = tmdbapi;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				280C23841E86E5A400EA9393 /* TMDBRequest.swift in Sources */,
 				280C23731E86637800EA9393 /* TMDBSearchRouter.swift in Sources */,
 				280C23751E86640300EA9393 /* TMDBAPIStatic.swift in Sources */,
 				280C237A1E8667F000EA9393 /* TMDBGenres.swift in Sources */,
