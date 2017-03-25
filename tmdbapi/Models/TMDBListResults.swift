@@ -9,15 +9,56 @@
 import Foundation
 import SwiftyJSON
 
-public protocol TMDBListResultProtocol: ResponseObjectSerializable {
+public protocol TMDBListResultProtocol {
     var title: String { get }
     var description: String { get }
     var imagePath: String { get }
     var mediaType: TMDBMediaType { get }
 }
 
+final public class TMDBMultiListResult: TMDBListResultProtocol, ResponseObjectSerializable {
+    public var title: String {
+        get {
+            return self.listObject.title
+        }
+    }
+    
+    public var description: String {
+        get {
+            return self.listObject.description
+        }
+    }
+    
+    public var imagePath: String {
+        get {
+            return self.listObject.imagePath
+        }
+    }
+    public let mediaType: TMDBMediaType
+    let listObject: TMDBListResultProtocol
+    
+    public init?(json: JSON) {
+        guard let mediaTypeString = json["media_type"].string,
+            let mediaType = TMDBMediaType(rawValue: mediaTypeString) else {
+                return nil
+        }
+        self.mediaType = mediaType
+        
+        switch mediaType {
+        case .movie:
+            listObject = TMDBMovieListResult(json: json)!
+        case .tv:
+            listObject = TMDBTVListResult(json: json)!
+        case .person:
+            listObject = TMDBPersonListResult(json: json)!
+            
+        }
+        
+    }
+}
 
-final public class TMDBMovieListResult: TMDBListResultProtocol {
+
+final public class TMDBMovieListResult: TMDBListResultProtocol, ResponseObjectSerializable {
     public let posterPath: String?
     
     public let isAdult: Bool
@@ -56,10 +97,9 @@ final public class TMDBMovieListResult: TMDBListResultProtocol {
     public var mediaType : TMDBMediaType
     
     public init?(json: JSON) {
-        
         guard let mediaType = TMDBMediaType(rawValue: json["media_type"].string ?? "movie"),
             mediaType == .movie else {
-            return nil
+                return nil
         }
         self.mediaType = mediaType
         
@@ -91,11 +131,11 @@ final public class TMDBMovieListResult: TMDBListResultProtocol {
     
 }
 
-final public class TMDBTVListResult: TMDBListResultProtocol {
+final public class TMDBTVListResult: TMDBListResultProtocol, ResponseObjectSerializable {
     public let posterPath: String?
     
     public let overview: String
-    public let firstAirDate: Date
+    public let firstAirDate: Date?
     public let originalName: String
     public let genres: [TMDBTVGenre]
     public let originCountries: [String]
@@ -137,7 +177,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol {
         
         self.posterPath = json["poster_path"].string
         self.overview = json["overview"].stringValue
-        self.firstAirDate = TMDBAPIStatic.dateFormatter.date(from: json["first_air_date"].stringValue)!
+        self.firstAirDate = TMDBAPIStatic.dateFormatter.date(from: json["first_air_date"].stringValue)
         
         self.originalName = json["original_name"].stringValue
         self.id = json["id"].uIntValue
@@ -168,7 +208,7 @@ final public class TMDBTVListResult: TMDBListResultProtocol {
     
 }
 
-final public class TMDBPersonListResult: TMDBListResultProtocol {
+final public class TMDBPersonListResult: TMDBListResultProtocol, ResponseObjectSerializable {
     public let profilePath: String
     public let isAdult: Bool
     public let id: UInt
