@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-internal enum TMDBSearchRouter: URLRequestConvertible {
+public enum TMDBSearchRouter: URLRequestConvertible {
     case multi(query: String, page: Int?)
     case movie(query: String, page: Int?)
     case tv(query: String, page: Int?)
@@ -44,7 +44,7 @@ internal enum TMDBSearchRouter: URLRequestConvertible {
     }
     
     // MARK: URLRequestConvertible
-    func asURLRequest() throws -> URLRequest {
+    public func asURLRequest() throws -> URLRequest {
         let url = try TMDBSearchRouter.baseURLString.asURL()
         
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
