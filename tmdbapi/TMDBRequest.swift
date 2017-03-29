@@ -21,22 +21,31 @@ internal extension URL {
     }
 }
 
-public extension Alamofire.DataRequest {
-    public func nextPage(sessionManager: SessionManager) throws -> Alamofire.DataRequest {
-        guard let request = self.request,
-            let url = request.url,
-                let currentPageString = url.paramValue(forParam: "page"),
-                    let currentPage = Int(currentPageString) else {
+internal extension URLRequest {
+    mutating func nextPageRequest() throws {
+        guard let url = self.url,
+            let currentPageString = url.paramValue(forParam: "page"),
+                let currentPage = Int(currentPageString) else {
             throw PaginationError.notSupported
         }
         
         let nextPage = currentPage + 1
         let nextPageURL = URL(string: url.absoluteString.replacingOccurrences(of: "page=\(currentPage)", with: "page=\(nextPage)"))!
         
-        var newRequest = request
-        newRequest.url = nextPageURL
+        self.url = nextPageURL
+    }
+}
+
+
+public extension Alamofire.DataRequest {
+    public func nextPage(sessionManager: SessionManager) throws -> Alamofire.DataRequest {
+        guard var request = self.request else {
+                throw PaginationError.notSupported
+        }
         
-        return sessionManager.request(nextPageURL, method: HTTPMethod(rawValue: request.httpMethod!)!)
+        try request.nextPageRequest()
+        
+        return sessionManager.request(request.url!, method: HTTPMethod(rawValue: request.httpMethod!)!)
         
     }
 }
